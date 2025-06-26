@@ -16,6 +16,11 @@ app.get('/', (req, res) => {
     res.status(201).json("Home GET Request");
 });
 
+// Add this with your other routes in server.js
+app.get('/', (req, res) => {
+  res.send('Backend server is running! Welcome to the API.');
+});
+
 app.use('/api', router);
 
 connect().then(() => {
