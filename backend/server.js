@@ -12,9 +12,6 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.disable('x-powered-by');
 
-app.get('/', (req, res) => {
-    res.status(201).json("Home GET Request");
-});
 
 // Add this with your other routes in server.js
 app.get('/', (req, res) => {
