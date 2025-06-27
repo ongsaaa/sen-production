@@ -1,6 +1,6 @@
-// src/pages/AddOpportunityPage.tsx
 import React, { useState } from 'react';
 
+// --- Constants and Types ---
 const allowedTypes = ['workshops', 'lectures', 'skill development', 'shadowing', "internships", "externships", "competitions", "networking", "community projects"];
 const allowedStatus = ['open', 'closed'];
 const industryOptions = [
@@ -8,13 +8,12 @@ const industryOptions = [
   "Education", "Engineering", "Arts & Media", "Science", "Finance",
   "Hospitality", "Manufacturing", "Social Impact", "Other"
 ];
-
 const apiUrl = import.meta.env.VITE_API_URL;
 
 interface FormData {
   type: string;
   name: string;
-  industry: string; // Stores the single selected industry
+  industry: string;
   description: string;
   imageUrl: string;
   link: string;
@@ -22,43 +21,51 @@ interface FormData {
   opening: string;
   deadline: string;
   organization: string;
-  // post_date is removed from form state, will be generated on submit
 }
 
+const initialFormData: FormData = {
+  type: allowedTypes[0],
+  name: '',
+  industry: industryOptions[0],
+  description: '',
+  imageUrl: '',
+  link: '',
+  status: allowedStatus[0],
+  opening: '',
+  deadline: '',
+  organization: '',
+};
+
+// --- Main Component ---
 const AddOpportunityPage: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    type: allowedTypes[0],
-    name: '',
-    industry: industryOptions[0], // Default to the first industry option
-    description: '',
-    imageUrl: '',
-    link: '',
-    status: allowedStatus[0],
-    opening: '',
-    deadline: '',
-    organization: '',
-  });
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const formatDateForPayload = (date: Date): string => {
-    const day = ('0' + date.getDate()).slice(-2);
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Months are 0-indexed
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-  };
-
+  // --- Handlers ---
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
-    }));
+    setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleNextStep = () => {
+    if (step === 1) {
+      if (!formData.name.trim() || !formData.description.trim()) {
+        setErrorMessage('Please fill in the Opportunity Name and Description.');
+        return;
+      }
+    }
+    setErrorMessage(null);
+    setStep(prev => prev + 1);
+  };
+
+  const handlePrevStep = () => setStep(prev => prev - 1);
+
+  const handleSubmit = async () => {
+    if (!window.confirm("Are you sure you want to submit this opportunity?")) return;
+
     setIsSubmitting(true);
     setSubmitMessage(null);
     setErrorMessage(null);
@@ -75,140 +82,177 @@ const AddOpportunityPage: React.FC = () => {
       return;
     }
 
-    const currentPostDate = formatDateForPayload(new Date());
+    const currentPostDate = ((d) => `${('0' + d.getDate()).slice(-2)}-${('0' + (d.getMonth() + 1)).slice(-2)}-${d.getFullYear()}`)(new Date());
 
     const payload = {
       ...formData,
-      industry: formData.industry ? [formData.industry] : [], // Send as an array
-      post_date: currentPostDate, // Add current date as post_date
+      industry: formData.industry ? [formData.industry] : [],
+      post_date: currentPostDate,
     };
 
     try {
       const response = await fetch(`${apiUrl}/api/createitem`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
-
       const result = await response.json();
 
       if (!response.ok) {
-        const errorMsg = typeof result.error === 'string' ? result.error : (result.message || 'An unknown error occurred');
-        const errorDetails = typeof result.details === 'object' ? JSON.stringify(result.details) : result.details;
-        throw new Error(`${errorMsg}${errorDetails ? ` (${errorDetails})` : ''}`);
+        throw new Error(result.error || result.message || 'An unknown error occurred');
       }
 
-      setSubmitMessage('Opportunity created successfully!');
-      setFormData({ // Reset form
-        type: allowedTypes[0],
-        name: '',
-        industry: industryOptions[0],
-        description: '',
-        imageUrl: '',
-        link: '',
-        status: allowedStatus[0],
-        opening: '',
-        deadline: '',
-        organization: '',
-      });
+      setSubmitMessage('Opportunity created successfully! You will be redirected shortly.');
+      setTimeout(() => {
+        window.location.href = '/opportunities';
+      }, 2000);
+
     } catch (error) {
       const err = error as Error;
-      console.error('Failed to create opportunity:', err);
       setErrorMessage(err.message || 'An unexpected error occurred.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const inputBaseClass = "block w-full border rounded-md shadow-sm sm:text-sm transition-colors duration-150 ease-in-out";
-  const inputPaddingClass = "px-3 py-2.5";
-  const inputBorderClass = "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500";
-  const placeholderClass = "placeholder-gray-400";
-
-  const inputClass = `${inputBaseClass} ${inputPaddingClass} ${inputBorderClass} ${placeholderClass}`;
+  // --- Styling Classes ---
+  const inputClass = "block w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm transition-colors duration-150 ease-in-out bg-gray-50 p-3";
   const labelClass = "block text-sm font-semibold text-gray-700 mb-1.5";
+  const buttonClass = "w-auto flex justify-center py-2.5 px-8 border border-transparent rounded-lg shadow-md text-base font-medium text-white transition-all duration-300 ease-in-out";
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-2xl mx-auto">
-        <div className="bg-white shadow-2xl rounded-xl p-8 sm:p-10">
-          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900 mb-8 text-center">
-            Add New Opportunity
-          </h1>
-
-          {submitMessage && <div className="mb-5 p-4 rounded-md bg-green-50 border border-green-300 text-green-700 text-sm">{submitMessage}</div>}
-          {errorMessage && <div className="mb-5 p-4 rounded-md bg-red-50 border border-red-300 text-red-700 text-sm">{errorMessage}</div>}
-
-          <form onSubmit={handleSubmit} className="space-y-5"> {/* Reduced space-y */}
-            <div>
-              <label htmlFor="name" className={labelClass}>Opportunity Name</label>
-              <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} className={inputClass} />
+  // --- Render Logic ---
+  const renderStepContent = () => {
+    switch (step) {
+      case 1:
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="md:col-span-2">
+              <label htmlFor="name" className={labelClass}>Opportunity Name *</label>
+              <input type="text" name="name" value={formData.name} onChange={handleChange} className={inputClass} placeholder="e.g., Summer Tech Internship" />
             </div>
-
             <div>
               <label htmlFor="type" className={labelClass}>Type *</label>
-              <select name="type" id="type" value={formData.type} onChange={handleChange} required className={inputClass}>
-                {allowedTypes.map(type => <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>)}
+              <select name="type" value={formData.type} onChange={handleChange} className={inputClass}>
+                {allowedTypes.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
               </select>
             </div>
-
-            <div>
-              <label htmlFor="description" className={labelClass}>Description *</label>
-              <textarea name="description" id="description" rows={3} value={formData.description} onChange={handleChange} required className={inputClass}></textarea> {/* Reduced rows */}
-            </div>
-
-            <div>
-              <label htmlFor="industry" className={labelClass}>Industry *</label>
-              <select name="industry" id="industry" value={formData.industry} onChange={handleChange} required className={inputClass}>
-                {industryOptions.map(industry => <option key={industry} value={industry}>{industry}</option>)}
-              </select>
-            </div>
-
             <div>
               <label htmlFor="organization" className={labelClass}>Organization / Host</label>
-              <input type="text" name="organization" id="organization" value={formData.organization} onChange={handleChange} className={inputClass} />
+              <input type="text" name="organization" value={formData.organization} onChange={handleChange} className={inputClass} placeholder="e.g., SEN Corporation" />
             </div>
-
+            <div className="md:col-span-2">
+              <label htmlFor="description" className={labelClass}>Description *</label>
+              <textarea name="description" rows={4} value={formData.description} onChange={handleChange} className={inputClass} placeholder="Describe the opportunity..."></textarea>
+            </div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
+              <label htmlFor="status" className={labelClass}>Status *</label>
+              <select name="status" value={formData.status} onChange={handleChange} className={inputClass}>
+                {allowedStatus.map(s => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="industry" className={labelClass}>Industry *</label>
+              <select name="industry" value={formData.industry} onChange={handleChange} className={inputClass}>
+                {industryOptions.map(i => <option key={i} value={i}>{i}</option>)}
+              </select>
+            </div>
+            <div>
+              <label htmlFor="opening" className={labelClass}>Opening Date</label>
+              <input type="text" name="opening" value={formData.opening} onChange={handleChange} className={inputClass} placeholder="DD-MM-YYYY" />
+            </div>
+            <div>
+              <label htmlFor="deadline" className={labelClass}>Application Deadline</label>
+              <input type="text" name="deadline" value={formData.deadline} onChange={handleChange} className={inputClass} placeholder="DD-MM-YYYY" />
+            </div>
+            <div className="md:col-span-2">
+              <label htmlFor="link" className={labelClass}>Link to Opportunity</label>
+              <input type="url" name="link" value={formData.link} onChange={handleChange} className={inputClass} placeholder="https://apply.example.com" />
+            </div>
+            <div className="md:col-span-2">
               <label htmlFor="imageUrl" className={labelClass}>Image URL</label>
-              <input type="url" name="imageUrl" id="imageUrl" value={formData.imageUrl} onChange={handleChange} className={inputClass} placeholder="https://example.com/image.png"/>
+              <input type="url" name="imageUrl" value={formData.imageUrl} onChange={handleChange} className={inputClass} placeholder="https://example.com/image.png" />
             </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className="space-y-4 text-sm">
+            <h2 className="text-xl font-semibold text-center text-gray-800 mb-4">Review Your Submission</h2>
+            <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 p-4 bg-gray-50 rounded-lg border">
+              <div><dt className="font-bold text-gray-600">Name</dt><dd className="text-gray-800">{formData.name || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Type</dt><dd className="text-gray-800">{formData.type}</dd></div>
+              <div><dt className="font-bold text-gray-600">Organization</dt><dd className="text-gray-800">{formData.organization || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Industry</dt><dd className="text-gray-800">{formData.industry}</dd></div>
+              <div><dt className="font-bold text-gray-600">Status</dt><dd className="text-gray-800">{formData.status}</dd></div>
+              <div><dt className="font-bold text-gray-600">Link</dt><dd className="text-gray-800 break-words">{formData.link || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Opening</dt><dd className="text-gray-800">{formData.opening || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Deadline</dt><dd className="text-gray-800">{formData.deadline || 'N/A'}</dd></div>
+              <div className="md:col-span-2"><dt className="font-bold text-gray-600">Description</dt><dd className="text-gray-800 mt-1">{formData.description || 'N/A'}</dd></div>
+            </dl>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
-            <div>
-              <label htmlFor="link" className={labelClass}>Link to Opportunity Details</label>
-              <input type="url" name="link" id="link" value={formData.link} onChange={handleChange} className={inputClass} placeholder="https://apply.example.com"/>
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 font-sans">
+      <div className="w-full max-w-3xl mx-auto">
+        <div className="bg-white shadow-2xl rounded-2xl p-6 md:p-8 transition-all duration-500 ease-in-out">
+          <div className="mb-6 text-center">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Add an Opportunity</h1>
+            <p className="text-gray-500 mt-1">Step {step} of 3</p>
+            <div className="w-full bg-gray-200 rounded-full h-1.5 mt-3">
+              <div
+                className="bg-indigo-600 h-1.5 rounded-full transition-all duration-500"
+                style={{ width: `${(step / 3) * 100}%` }}
+              ></div>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5"> {/* Reduced gap-y */}
-              <div>
-                <label htmlFor="status" className={labelClass}>Status *</label>
-                <select name="status" id="status" value={formData.status} onChange={handleChange} required className={inputClass}>
-                  {allowedStatus.map(s => <option key={s} value={s}>{s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
-                </select>
-              </div>
-               {/* Post Date field is removed from UI */}
-               <div>
-                <label htmlFor="opening" className={labelClass}>Opening Date (DD-MM-YYYY)</label>
-                <input type="text" name="opening" id="opening" value={formData.opening} onChange={handleChange} className={inputClass} placeholder="DD-MM-YYYY" />
-              </div>
-            </div>
+          {submitMessage && <div className="mb-4 p-4 rounded-lg bg-green-50 border border-green-300 text-green-800 text-sm">{submitMessage}</div>}
+          {errorMessage && <div className="mb-4 p-4 rounded-lg bg-red-50 border border-red-300 text-red-700 text-sm">{errorMessage}</div>}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">  {/* This grid now only contains deadline or can be merged */}
-              <div>
-                <label htmlFor="deadline" className={labelClass}>Application Deadline (DD-MM-YYYY)</label>
-                <input type="text" name="deadline" id="deadline" value={formData.deadline} onChange={handleChange} className={inputClass} placeholder="DD-MM-YYYY" />
-              </div>
-            </div>
+          <div className="min-h-[350px] md:min-h-[320px]">
+             {renderStepContent()}
+          </div>
 
-            <div className="pt-2">
-              <button type="submit" disabled={isSubmitting}
-                      className="w-full flex justify-center py-3 px-6 border border-transparent rounded-lg shadow-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-60 transition-opacity">
-                {isSubmitting ? 'Submitting...' : 'Create Opportunity'}
+          <div className="mt-6 pt-6 border-t border-gray-200 flex justify-between items-center">
+            <button
+              type="button"
+              onClick={handlePrevStep}
+              className={`${buttonClass} bg-gray-600 hover:bg-gray-700 disabled:opacity-0 disabled:pointer-events-none`}
+              disabled={step === 1}
+            >
+              Back
+            </button>
+            
+            {step < 3 && (
+              <button
+                type="button"
+                onClick={handleNextStep}
+                className={`${buttonClass} bg-indigo-600 hover:bg-indigo-700`}
+              >
+                Next
               </button>
-            </div>
-          </form>
+            )}
+            {step === 3 && (
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className={`${buttonClass} bg-green-600 hover:bg-green-700 disabled:opacity-50`}
+              >
+                {isSubmitting ? 'Submitting...' : 'Confirm & Submit'}
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
