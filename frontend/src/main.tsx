@@ -25,6 +25,7 @@ import UniPathwaysPage from './pages/UniPathwaysPage' // Path to your university
 import ExamsPage from './pages/ExamsPage' // Path to your exams page
 import CareerPathwaysPage from './pages/CareerPathwaysPage'
 import OpportunityDetailPage from './pages/OpportunityDetailPage'
+import PrivacyPage from './pages/PrivacyPage'
 
 import './styles.css' // Your global styles
 
@@ -127,6 +128,12 @@ const opportunityDetailRoute = createRoute({
   component: OpportunityDetailPage,
 });
 
+const privacyPolicyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/privacy-policy',
+  component: PrivacyPage,
+});
+
 
 // 3. Create the Route Tree
 const routeTree = rootRoute.addChildren([
@@ -144,7 +151,8 @@ const routeTree = rootRoute.addChildren([
   uniPathwaysRoute,
   examsRoute,
   careerPathwaysPage,
-  opportunityDetailRoute
+  opportunityDetailRoute,
+  privacyPolicyRoute
 ]);
 
 // 4. Create the Router Instance
