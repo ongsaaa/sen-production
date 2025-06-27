@@ -8,13 +8,14 @@ const OpportunitiesSection = () => {
   const [error, setError] = useState<string | null>(null);
   const [limit, setLimit] = useState(8);
   const INITIAL_LIMIT = 8;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchOpportunities = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/getitem'); // Using relative path for API call
+        const response = await fetch(`${apiUrl}/api/getitem`); // Using relative path for API call
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -22,7 +23,7 @@ const OpportunitiesSection = () => {
         
         // This log will show you exactly what the backend is sending.
         // Check your browser's developer console to see it.
-        console.log("Fetched data from /api/getitem:", data);
+        console.log(`Fetched data from ${apiUrl}/api/getitem:`, data);
 
         const transformedData = data.map((item: any): Opportunity => ({
           id: item._id,

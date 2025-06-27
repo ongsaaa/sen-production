@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from '@tanstack/react-router';
 import type { Opportunity } from '../components/OpportunityCard'; // Import the type
 
+
 const OpportunityDetailPage = () => {
   const { opportunityId } = useParams({ from: '/opportunities/$opportunityId' });
   const [opportunity, setOpportunity] = useState<Opportunity | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (!opportunityId) return;
@@ -14,7 +16,7 @@ const OpportunityDetailPage = () => {
     const fetchOpportunity = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/api/getitem/${opportunityId}`);
+        const response = await fetch(`${apiUrl}/api/getitem/${opportunityId}`);
         if (!response.ok) {
           throw new Error('Opportunity not found');
         }
