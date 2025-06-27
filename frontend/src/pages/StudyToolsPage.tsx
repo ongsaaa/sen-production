@@ -32,13 +32,14 @@ const StudyToolsPage: React.FC = () => {
   const [groupedTools, setGroupedTools] = useState<{ [key: string]: StudyTool[] }>({});
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchStudyTools = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/studytools');
+        const response = await fetch(`${apiUrl}/api/studytools`);
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);

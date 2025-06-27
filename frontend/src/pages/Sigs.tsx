@@ -25,13 +25,14 @@ const SigsPage: React.FC = () => {
   const [sigs, setSigs] = useState<SigItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchSigs = async () => {
       setIsLoading(true)
       setError(null)
       try {
-        const response = await fetch('/api/sigs')
+        const response = await fetch(`${apiUrl}/api/sigs`)
         if (!response.ok) {
           const errorData = await response.json()
           throw new Error(

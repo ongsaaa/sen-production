@@ -30,13 +30,14 @@ const ExamsPage: React.FC = () => {
   const [exams, setExams] = useState<ExamInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchExams = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/examsinfo');
+        const response = await fetch(`${apiUrl}/api/examsinfo`);
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);

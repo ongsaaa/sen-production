@@ -9,6 +9,8 @@ const industryOptions = [
   "Hospitality", "Manufacturing", "Social Impact", "Other"
 ];
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 interface FormData {
   type: string;
   name: string;
@@ -82,7 +84,7 @@ const AddOpportunityPage: React.FC = () => {
     };
 
     try {
-      const response = await fetch('/api/createitem', {
+      const response = await fetch(`${apiUrl}/api/createitem`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

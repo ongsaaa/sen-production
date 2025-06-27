@@ -34,13 +34,14 @@ const PartnersPage: React.FC = () => {
   }>({})
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchPartners = async () => {
       setIsLoading(true)
       setError(null)
       try {
-        const response = await fetch('/api/partners')
+        const response = await fetch(`${apiUrl}/api/partners`)
         if (!response.ok) {
           const errorData = await response.json()
           throw new Error(

@@ -40,13 +40,14 @@ const UniPathwaysPage: React.FC = () => {
   const [pathways, setPathways] = useState<CountryPathway[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchPathways = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await fetch('/api/unipathways');
+        const response = await fetch(`${apiUrl}/api/unipathways`);
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
