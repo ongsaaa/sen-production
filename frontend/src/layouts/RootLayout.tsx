@@ -1,16 +1,19 @@
 // src/layouts/RootLayout.tsx
 import React, { useState, useEffect } from 'react';
 import { Outlet } from '@tanstack/react-router';
-import Header from '@/components/Header'; // Ensure Header is .tsx and path is correct
-import Footer from '@/components/Footer';   // Ensure Footer is .tsx and path is correct
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const RootLayout: React.FC = () => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) setIsHeaderVisible(true);
-      else setIsHeaderVisible(false);
+      if (window.scrollY > 100) {
+        setIsHeaderVisible(true);
+      } else {
+        setIsHeaderVisible(false);
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

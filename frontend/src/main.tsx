@@ -161,7 +161,15 @@ const router = createRouter({
   defaultPreload: 'intent',
 });
 
-// Optional: Register the router for type safety
+// Subscribe to the router's events to handle scrolling
+router.subscribe('onResolved', () => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+});
+
 declare module '@tanstack/react-router' {
   interface Register {
     router: typeof router
