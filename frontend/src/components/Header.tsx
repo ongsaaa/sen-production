@@ -74,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
   return (
     <header
       className={`
-        bg-white shadow-md font-['Inter',_sans-serif]
+        bg-white shadow-md font-sans
         fixed top-0 left-0 right-0 w-full z-50
         transition-all duration-300 ease-in-out
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}

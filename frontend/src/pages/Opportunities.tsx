@@ -4,11 +4,11 @@ import OpportunitiesSection from '@/components/OpportunitiesSection'
 const OpportunitiesPage: React.FC = () => {
   const highlightColorForOpportunities = 'text-purple-500' // Example: Emerald Green
   return (
-    <div className="font-['Inter',_sans-serif]">
+    <div className="font-sans">
       <section className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white p-6">
         <div className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span

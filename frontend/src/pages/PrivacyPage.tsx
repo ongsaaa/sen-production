@@ -4,7 +4,7 @@ const PrivacyPage: React.FC = () => {
   return (
     // This outer div provides a background color for the whole page area.
     // In a real app, this might be handled by your main layout file (e.g., layout.tsx).
-    <div className="bg-gray-50 min-h-screen py-8 sm:py-12">
+    <div className="bg-gray-50 min-h-screen py-8 sm:py-12 font-sans">
       <div className="max-w-4xl mx-auto bg-white p-6 sm:p-8 lg:p-10 rounded-lg shadow-md">
         
         {/* --- Disclaimer Box --- */}
@@ -18,7 +18,7 @@ const PrivacyPage: React.FC = () => {
         {/* --- Main Content --- */}
         <div className="space-y-6 text-gray-700">
           <div className="border-b border-gray-200 pb-4">
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">Privacy Policy</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 font-header">Privacy Policy</h1>
             <p className="mt-2 text-sm text-gray-500"><strong>Effective Date:</strong> 27 June 2025</p>
             <p className="text-sm text-gray-500"><strong>Last Updated:</strong> 27 June 2025</p>
           </div>

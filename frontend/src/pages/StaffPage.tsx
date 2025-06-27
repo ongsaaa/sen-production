@@ -111,8 +111,7 @@ const ProfileCard = ({ member }) => (
 
 const TeamPage = () => {
   return (
-    <div className="bg-gray-100 min-h-screen font-['Inter',_sans-serif]">
-      {' '}
+    <div className="bg-gray-100 min-h-screen font-sans">
       {/* Base background for the page */}
       {/* Header Section (from your screenshot - assuming this is part of a layout) */}
       {/* <header className="bg-gray-800 text-white p-4"> ... Navbar ... </header> */}
@@ -135,7 +134,7 @@ const TeamPage = () => {
           <div className="bg-white p-8 md:p-12 rounded-xl shadow-xl overflow-hidden">
             {' '}
             {/* Added overflow-hidden for floated elements */}
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8 text-center md:text-left">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-8 text-center md:text-left">
               A Word From Our Founder
             </h2>
             <div className="md:flex md:items-start">
@@ -193,7 +192,7 @@ const TeamPage = () => {
 
         {/* Section 3: Team Profile Cards */}
         <section className="container mx-auto px-4 md:px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 md:mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-10 md:mb-12 text-center">
             Our Core Team Members
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">

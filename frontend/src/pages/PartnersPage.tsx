@@ -64,12 +64,12 @@ const PartnersPage: React.FC = () => {
   }, [])
 
   return (
-    <div className="font-['Inter',_sans-serif]">
+    <div className="font-sans">
       {/* Section 1: Hero */}
       <section className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white p-6">
         <div className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Our</span>
@@ -183,7 +183,7 @@ const PartnersPage: React.FC = () => {
 
           {/* "Collaborate With Us & Amplify Impact" Intro Text */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Collaborate With Us & Amplify Impact
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">

@@ -27,7 +27,6 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
     });
   };
 
-  // Function to handle broken images
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const target = e.target as HTMLImageElement;
     target.onerror = null; // Prevent infinite loop if the placeholder also fails
@@ -45,7 +44,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
           src={opportunity.imageUrl}
           alt={opportunity.title}
           className="w-full h-48 object-cover flex-shrink-0"
-          onError={handleImageError} // Add this onError handler
+          onError={handleImageError}
         />
       )}
       <div className="p-5 flex flex-col flex-grow">

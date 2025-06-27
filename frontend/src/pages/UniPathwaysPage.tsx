@@ -71,12 +71,12 @@ const UniPathwaysPage: React.FC = () => {
   };
 
   return (
-    <div className="font-['Inter',_sans-serif]">
+    <div className="font-sans">
       {/* Section 1: Hero (Keep as is) */}
       <section className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white p-6">
         <div className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">University</span>
@@ -94,7 +94,7 @@ const UniPathwaysPage: React.FC = () => {
       <section className="bg-gray-50 text-gray-800 py-16 md:py-24 px-4 md:px-8 lg:px-12">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Explore Your Global University Options
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -237,4 +237,3 @@ const UniPathwaysPage: React.FC = () => {
 };
 
 export default UniPathwaysPage;
-

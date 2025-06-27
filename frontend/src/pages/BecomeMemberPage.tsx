@@ -7,14 +7,12 @@ const BecomeMemberPage: React.FC = () => {
   const highlightColorForMember = 'text-indigo-500' // Example: Sky Blue
 
   return (
-    <div className="font-['Inter',_sans-serif]">
-      {' '}
-      {/* Font applied to the whole page */}
+    <div className="font-sans">
       {/* Section 1: "Become a Member" Hero (Dark Background) */}
        <section className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white p-6">
         <div className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Become a</span>
@@ -32,7 +30,7 @@ const BecomeMemberPage: React.FC = () => {
       <section className="bg-white text-gray-800 py-16 md:py-24 px-6 md:px-12 lg:px-24">
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Join Our Thriving Community
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">

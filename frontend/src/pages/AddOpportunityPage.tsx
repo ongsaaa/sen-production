@@ -131,7 +131,7 @@ const AddOpportunityPage: React.FC = () => {
   const labelClass = "block text-sm font-semibold text-gray-700 mb-1.5";
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8 font-['Inter',_sans-serif]">
+    <div className="min-h-screen bg-gray-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-2xl mx-auto">
         <div className="bg-white shadow-2xl rounded-xl p-8 sm:p-10">
           <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900 mb-8 text-center">

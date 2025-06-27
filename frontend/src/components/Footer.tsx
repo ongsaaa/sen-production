@@ -31,7 +31,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#282c34] text-gray-400 text-xs py-8 px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#282c34] text-gray-400 text-xs py-8 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0 md:space-x-6">
         {/* Left side: Copyright text */}
         <div className="text-center md:text-left">

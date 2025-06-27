@@ -4,9 +4,9 @@ import { Link } from '@tanstack/react-router';
 
 const NotFoundPage: React.FC = () => {
   return (
-    <div className="font-['Inter',_sans-serif] min-h-screen flex flex-col items-center justify-center text-center bg-gray-100 text-gray-800 p-6">
+    <div className="font-sans min-h-screen flex flex-col items-center justify-center text-center bg-gray-100 text-gray-800 p-6">
       <div className="max-w-md">
-        <h1 className="text-6xl md:text-9xl font-bold text-purple-600">404</h1>
+        <h1 className="font-header text-6xl md:text-9xl font-bold text-purple-600">404</h1>
         <h2 className="mt-4 text-2xl md:text-4xl font-semibold text-gray-700">
           Page Not Found
         </h2>

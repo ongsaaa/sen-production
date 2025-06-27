@@ -40,7 +40,7 @@ const ContactPage: React.FC = () => {
   const highlightColorForUs = 'text-violet-400'; // Example: Violet
 
   return (
-    <div className="font-['Inter',_sans-serif]"> {/* Font applied to the whole page */}
+    <div className="font-sans"> {/* Font applied to the whole page */}
 
       {/* Section 1: "Contact Us" Hero (Dark Background) */}
       <section
@@ -48,7 +48,7 @@ const ContactPage: React.FC = () => {
       >
         <div className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Contact</span>
@@ -68,7 +68,7 @@ const ContactPage: React.FC = () => {
         <div className="container mx-auto max-w-4xl">
 
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Get In Touch
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">

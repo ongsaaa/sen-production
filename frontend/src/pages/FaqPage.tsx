@@ -77,13 +77,12 @@ const FaqPage: React.FC = () => {
   const highlightColorForFaq = 'text-amber-400' // Example: Amber
 
   return (
-    <div className="font-['Inter',_sans-serif]">
-      {' '}
-      {/* Font applied to the whole page */}
+    <div className="font-sans">
+      {/* Section 1: Hero */}
       <section className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white p-6">
         <div className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className={`italic ${highlightColorForFaq}`}>FAQ</span>
@@ -101,7 +100,7 @@ const FaqPage: React.FC = () => {
           {' '}
           {/* Max width for FAQ readability */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
               Frequently Asked Questions
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">

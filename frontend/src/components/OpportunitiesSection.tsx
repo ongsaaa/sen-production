@@ -57,7 +57,7 @@ const OpportunitiesSection = () => {
   // Loading and Error States
   if (isLoading) {
     return (
-      <div className="bg-white py-16 text-center">
+      <div className="bg-white py-16 text-center font-sans">
         <p className="text-lg text-gray-600">Loading opportunities...</p>
       </div>
     );
@@ -65,14 +65,14 @@ const OpportunitiesSection = () => {
 
   if (error) {
     return (
-      <div className="bg-white py-16 text-center">
+      <div className="bg-white py-16 text-center font-sans">
         <p className="text-lg text-red-600">Error fetching opportunities: {error}</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+    <div className="bg-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
