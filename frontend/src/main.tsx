@@ -26,6 +26,7 @@ import ExamsPage from './pages/ExamsPage' // Path to your exams page
 import CareerPathwaysPage from './pages/CareerPathwaysPage'
 import OpportunityDetailPage from './pages/OpportunityDetailPage'
 import PrivacyPage from './pages/PrivacyPage'
+import WebscrapePage from './pages/WebscrapePage'
 
 import './styles.css' // Your global styles
 
@@ -34,7 +35,7 @@ console.log('main.tsx: Script started') // <-- ADD THIS
 // 1. Define the Root Route
 const rootRoute = createRootRoute({
   component: RootLayout, // The component for the root layout
-  notFoundComponent: () => <NotFoundPage />
+  notFoundComponent: () => <NotFoundPage />,
 })
 
 // 2. Define Child Routes
@@ -60,35 +61,35 @@ const partnersRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/partners', // Or your desired path
   component: PartnersPage,
-});
+})
 
 const staffRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/staff', // Or your desired path
   component: StaffPage,
-});
+})
 
 const faqRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/faq', // Or your desired path
   component: FaqPage,
-});
+})
 
 const contactRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/contacts', // Or your desired path
   component: ContactPage,
-});
+})
 
 const sigsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/sigs', // Or /special-interest-groups, /communities etc.
-  component: SigsPage
-});
+  component: SigsPage,
+})
 
 const oportunitiesRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/opportunities', 
+  path: '/opportunities',
   component: OpportunitiesPage,
 })
 
@@ -126,14 +127,19 @@ const opportunityDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/opportunities/$opportunityId',
   component: OpportunityDetailPage,
-});
+})
 
 const privacyPolicyRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/privacy-policy',
   component: PrivacyPage,
-});
+})
 
+const webscrapeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/webscrape',
+  component: WebscrapePage,
+})
 
 // 3. Create the Route Tree
 const routeTree = rootRoute.addChildren([
@@ -152,15 +158,15 @@ const routeTree = rootRoute.addChildren([
   examsRoute,
   careerPathwaysPage,
   opportunityDetailRoute,
-  privacyPolicyRoute
-]);
+  privacyPolicyRoute,
+  webscrapeRoute
+])
 
 // 4. Create the Router Instance
 const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
-});
-
+})
 
 declare module '@tanstack/react-router' {
   interface Register {
@@ -168,11 +174,11 @@ declare module '@tanstack/react-router' {
   }
 }
 
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById('root')
 if (rootElement) {
   ReactDOM.createRoot(rootElement).render(
     <React.StrictMode>
       <RouterProvider router={router} />
-    </React.StrictMode>
-  );
+    </React.StrictMode>,
+  )
 }

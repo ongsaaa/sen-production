@@ -1,10 +1,10 @@
-
 import mongoose from "mongoose";
 
 const allowedTypes = ['workshops', 'lectures', 'skill development', 'shadowing', "internships", "externships", "competitions", "networking", "community projects"];
 const allowedStatus = ['open', 'closed'];
 
 function isValidDate(value) {
+    if (!value) return true; // Allow empty dates
     const regex = /^\d{2}-\d{2}-\d{4}$/;
     if (!regex.test(value)) {
         return false;
@@ -35,7 +35,7 @@ export const ItemSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a description for the item"]
     },
-    imageUrl: { // This field will store the external image URL
+    imageUrl: { 
         type: String,
         default: ''
     },
@@ -76,6 +76,21 @@ export const ItemSchema = new mongoose.Schema({
             validator: isValidDate,
             message: 'Please provide a valid date in the format dd-mm-yyyy'
         }
+    },
+    ageRestriction: {
+        type: String,
+    },
+    location: {
+        type: String,
+    },
+    schedule: {
+        type: String,
+    },
+    fee: {
+        type: String,
+    },
+    additionalInfo: {
+        type: String,
     }
 });
 

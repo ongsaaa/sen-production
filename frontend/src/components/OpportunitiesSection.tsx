@@ -21,8 +21,6 @@ const OpportunitiesSection = () => {
         }
         const data = await response.json();
         
-        // This log will show you exactly what the backend is sending.
-        // Check your browser's developer console to see it.
         console.log(`Fetched data from ${apiUrl}/api/getitem:`, data);
 
         const transformedData = data.map((item: any): Opportunity => ({
@@ -32,7 +30,8 @@ const OpportunitiesSection = () => {
           title: item.name || 'Untitled Opportunity',
           organizer: item.organization || 'Unknown Organizer',
           description: item.description || 'No description provided.',
-          date: item.opening || item.post_date,
+          // MODIFIED LINE: Prioritize deadline over other dates
+          date: item.deadline || item.opening || item.post_date,
           status: item.status,
           link: item.link || '#',
         }));
@@ -103,7 +102,6 @@ const OpportunitiesSection = () => {
             )}
           </>
         ) : (
-          // This is the new, more informative "empty state" message
           <div className="text-center py-10 border-2 border-dashed border-gray-300 rounded-lg">
             <h3 className="text-lg font-semibold text-gray-800">No Opportunities Found</h3>
             <p className="mt-2 text-gray-500">Your database is likely empty. Try adding an opportunity to see it here.</p>

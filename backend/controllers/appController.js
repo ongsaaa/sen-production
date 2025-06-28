@@ -5,6 +5,9 @@ import UniPathwayModel from "../model/UniPathway.model.js";
 import SigModel from "../model/Sig.model.js";
 import PartnerModel from "../model/Partner.model.js";
 import CareerPathwayModel from "../model/CareerPathway.model.js";
+import axios from "axios";
+import * as cheerio from "cheerio"; 
+import getScrapedData from "metadata-scraper";
 
 export async function createItem(req, res) {
     try {
@@ -191,5 +194,51 @@ export async function getCareerPathways(req, res) {
         return res.status(200).send(transformed);
     } catch (error) {
         return res.status(500).send({ error: "Internal Server Error" });
+    }
+}
+
+export async function webscrapeUrl(req, res) {
+    const { url } = req.body;
+    if (!url) {
+        return res.status(400).send({ error: "URL is required" });
+    }
+
+    try {
+        const metadata = await getScrapedData(url);
+        const { data } = await axios.get(url);
+        const $ = cheerio.load(data);
+        const bodyText = $('body').text().replace(/\s\s+/g, ' ');
+
+        const getInfo = (keywords) => {
+            for (const keyword of keywords) {
+                const regex = new RegExp(`(?:${keyword})[:\\s]*([^\\n\\.\\,]{5,100})`, "i");
+                const match = bodyText.match(regex);
+                if (match && match[1]) {
+                    return match[1].trim();
+                }
+            }
+            return '';
+        };
+        
+        const description = (metadata.description || 'No description found.').substring(0, 1200);
+
+        const scrapedData = {
+            name: metadata.title || $('title').text(),
+            description: description.split(' ').slice(0, 300).join(' '),
+            imageUrl: metadata.image,
+            link: metadata.url || url,
+            organization: metadata.provider || $('meta[property="og:site_name"]').attr('content'),
+            ageRestriction: getInfo(['age restriction', 'ages']),
+            location: getInfo(['location', 'venue']),
+            schedule: getInfo(['schedule', 'dates', 'time']),
+            fee: getInfo(['fee', 'cost', 'price']),
+            opening: getInfo(['opening date', 'starts on', 'applications open']),
+            deadline: getInfo(['deadline', 'closes on', 'apply by']),
+        };
+
+        return res.status(200).send(scrapedData);
+
+    } catch (error) {
+        return res.status(500).send({ error: "Failed to scrape the URL.", message: error.message });
     }
 }

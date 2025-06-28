@@ -39,4 +39,7 @@ router.route('/careerpathways')
     .post(controller.createCareerPathway)
     .get(controller.getCareerPathways);
 
+// Webscrape Routes
+router.route('/webscrape').post(controller.webscrapeUrl);
+
 export default router;

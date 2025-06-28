@@ -9,9 +9,12 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "metadata-scraper": "^0.2.61",
     "mongodb": "^6.16.0",
     "mongodb-memory-server": "^10.1.4",
     "mongoose": "^8.15.0",
