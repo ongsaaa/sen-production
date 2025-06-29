@@ -1,12 +1,13 @@
 // src/layouts/RootLayout.tsx
-import React, { useState, useEffect } from 'react';
-import { Outlet, useRouterState } from '@tanstack/react-router';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import React, { useState, useEffect } from 'react'
+import { Outlet, useRouterState } from '@tanstack/react-router'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 const RootLayout: React.FC = () => {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-  const { location } = useRouterState();
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false)
+  const { location } = useRouterState()
+  const isHomePage = location.pathname === '/'
 
   // This effect runs only when the pathname changes, preventing loops.
   useEffect(() => {
@@ -14,31 +15,41 @@ const RootLayout: React.FC = () => {
       top: 0,
       left: 0,
       behavior: 'smooth',
-    });
-  }, [location.pathname]); // The effect depends on the pathname
+    })
+  }, [location.pathname]) // The effect depends on the pathname
 
   // This separate effect handles the header visibility on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsHeaderVisible(true);
+      // On the homepage, the header should never be visible.
+      // On other pages, it appears on scroll.
+      if (!isHomePage && window.scrollY > 100) {
+        setIsHeaderVisible(true)
       } else {
-        setIsHeaderVisible(false);
+        setIsHeaderVisible(false)
       }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    }
+    // Only add scroll listener if not on the homepage
+    if (!isHomePage) {
+      window.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (!isHomePage) {
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [isHomePage]) // Re-run this effect if isHomePage changes
 
   return (
     <div className="text-center font-['Inter',_sans-serif]">
-      <Header isVisible={isHeaderVisible} />
+      {!isHomePage && <Header isVisible={isHeaderVisible} />}
       <main className="bg-white">
         <Outlet />
       </main>
-      <Footer />
+      {!isHomePage && <Footer />}
     </div>
-  );
-};
+  )
+}
 
-export default RootLayout;
+export default RootLayout

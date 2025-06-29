@@ -72,7 +72,7 @@ const OpportunityCard: React.FC<OpportunityCardProps> = ({ opportunity }) => {
         </div>
 
         {/* CHANGE 2: Removed the top margin (mt-3) to close the gap completely. */}
-        <div className="relative h-36 overflow-y-auto scrollbar-hide [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]">
+        <div className="relative h-36 overflow-y-auto scrollbar-hide [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)] mt-2">
           <p className="text-sm text-gray-700 leading-relaxed">
             {opportunity.description}
           </p>

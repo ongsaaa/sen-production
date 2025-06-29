@@ -21,3 +21,15 @@ code {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* --- REPLACE your old animation CSS with this --- */
+@keyframes continuous-scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-carousel {
+  display: flex;
+  /* Adjust duration to control speed. 40s is a good starting point. */
+  animation: continuous-scroll 60s linear infinite;
+}

@@ -11,6 +11,7 @@ export default {
         sans: ['"Inter Tight"', 'sans-serif'], // Main and Section font
         header: ['Archivo', 'sans-serif'],      // Hero Header font
       },
+      // We are removing the animation and keyframes from here
     },
   },
   plugins: [
