@@ -22,14 +22,16 @@ code {
   scrollbar-width: none;  /* Firefox */
 }
 
-/* --- REPLACE your old animation CSS with this --- */
 @keyframes continuous-scroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-carousel {
-  display: flex;
-  /* Adjust duration to control speed. 40s is a good starting point. */
-  animation: continuous-scroll 60s linear infinite;
+  /* The animation is now defined on the children of this container */
+  animation: continuous-scroll 30s linear infinite;
 }
