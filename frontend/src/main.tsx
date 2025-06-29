@@ -27,6 +27,13 @@ import CareerPathwaysPage from './pages/CareerPathwaysPage'
 import OpportunityDetailPage from './pages/OpportunityDetailPage'
 import PrivacyPage from './pages/PrivacyPage'
 import WebscrapePage from './pages/WebscrapePage'
+import AmbassadorsPage from './pages/AmbassadorsPage'
+import MembersPage from './pages/MembersPage'
+import CommunityProjectsPage from './pages/CommunityProjectsPage'
+import ProposeOpportunityPage from './pages/ProposeOpportunityPage'
+import AnnouncementsPage from './pages/AnnouncementsPage'
+import NewsPage from './pages/NewsPage'
+import MeetupsPage from './pages/MeetupsPage'
 
 import './styles.css' // Your global styles
 
@@ -141,6 +148,49 @@ const webscrapeRoute = createRoute({
   component: WebscrapePage,
 })
 
+const ambassadorsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/ambassadors',
+  component: AmbassadorsPage,
+})
+
+const membersRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/members',
+  component: MembersPage,
+})
+
+const communityProjectsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/community-projects',
+  component: CommunityProjectsPage,
+})
+
+const proposeOpportunityRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/propose-an-opportunity',
+  component: ProposeOpportunityPage,
+})
+
+const announcementsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/announcements',
+  component: AnnouncementsPage,
+})
+
+const newsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/news',
+  component: NewsPage,
+})
+
+const meetupsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/meetups',
+  component: MeetupsPage,
+})
+
+
 // 3. Create the Route Tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -159,7 +209,14 @@ const routeTree = rootRoute.addChildren([
   careerPathwaysPage,
   opportunityDetailRoute,
   privacyPolicyRoute,
-  webscrapeRoute
+  webscrapeRoute,
+  ambassadorsRoute,
+  membersRoute,
+  communityProjectsRoute,
+  proposeOpportunityRoute,
+  announcementsRoute,
+  newsRoute,
+  meetupsRoute
 ])
 
 // 4. Create the Router Instance

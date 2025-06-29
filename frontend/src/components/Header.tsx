@@ -1,25 +1,25 @@
 // src/components/Header.tsx
-import React, { useState } from 'react';
-import { Link } from '@tanstack/react-router';
-import senLogo from '../assets/SEN_LOGO-removebg.png';
+import React, { useState } from 'react'
+import { Link } from '@tanstack/react-router'
+import senLogo from '../assets/SEN_LOGO-removebg.png'
 
 // Icons from react-icons library
-import { FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa';
-import { RiLineFill } from 'react-icons/ri';
+import { FaLinkedin, FaInstagram, FaDiscord } from 'react-icons/fa'
+import { RiLineFill } from 'react-icons/ri'
 
 // Define types for component props
 interface HeaderProps {
-  isVisible: boolean;
+  isVisible: boolean
 }
 
 const Header: React.FC<HeaderProps> = ({ isVisible }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null)
 
   // Toggles the accordion items in the mobile menu
   const handleAccordionToggle = (menuName: string) => {
-    setOpenAccordion(openAccordion === menuName ? null : menuName);
-  };
+    setOpenAccordion(openAccordion === menuName ? null : menuName)
+  }
 
   const navLinks = [
     {
@@ -28,7 +28,6 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
         { name: 'Who We Are', href: '/who-we-are' },
         { name: 'Partners', href: '/partners' },
         { name: 'Become a member', href: '/become-a-member' },
-        { name: 'Staff', href: '/staff' },
         { name: 'FAQ', href: '/faq' },
         { name: 'Contacts', href: '/contacts' },
       ],
@@ -38,6 +37,7 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
       dropdown: [
         { name: 'Ambassadors', href: '/ambassadors' },
         { name: 'Members', href: '/members' },
+        { name: 'Staff', href: '/staff' },
         { name: 'Calendar', href: '/calendar' },
         { name: 'Special Interest Groups (SIGs)', href: '/sigs' },
       ],
@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
         { name: 'University Pathways', href: '/uni-pathways' },
         { name: 'Exams', href: '/exams' },
         { name: 'Career Pathways', href: '/career-pathways' },
-        { name: 'Community Projects', href: '/comuunity-projects' },
+        { name: 'Community Projects', href: '/community-projects' },
         { name: 'Propose an Opportunity', href: '/propose-an-opportunity' },
       ],
     },
@@ -62,14 +62,14 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
         { name: 'Meetups', href: '/meetups' },
       ],
     },
-  ];
+  ]
 
   const socialLinks = [
     { name: 'LinkedIn', href: '#', Icon: FaLinkedin },
     { name: 'Instagram', href: '#', Icon: FaInstagram },
     { name: 'Discord', href: '#', Icon: FaDiscord },
     { name: 'LINE', href: '#', Icon: RiLineFill },
-  ];
+  ]
 
   return (
     <header
@@ -90,9 +90,10 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
                 alt="SEN Logo"
                 className="h-30 w-auto"
                 onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.onerror = null;
-                  target.src = 'https://placehold.co/120x50/FFFFFF/000000?text=LOGO&font=montserrat';
+                  const target = e.target as HTMLImageElement
+                  target.onerror = null
+                  target.src =
+                    'https://placehold.co/120x50/FFFFFF/000000?text=LOGO&font=montserrat'
                 }}
               />
             </Link>
@@ -104,8 +105,16 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
               <div key={link.name} className="relative group">
                 <div className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 flex items-center cursor-pointer">
                   {link.name}
-                  <svg className="inline-block w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                  <svg
+                    className="inline-block w-4 h-4 ml-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
                   </svg>
                 </div>
                 <div className="absolute z-20 left-0 mt-1 w-64 rounded-md shadow-xl bg-white ring-1 ring-black ring-opacity-5 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-300 ease-in-out transform origin-top scale-95 group-hover:scale-100">
@@ -158,12 +167,36 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
             >
               <span className="sr-only">Open main menu</span>
               {isMobileMenuOpen ? (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               ) : (
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                <svg
+                  className="block h-6 w-6"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
                 </svg>
               )}
             </button>
@@ -182,8 +215,16 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
                   className="w-full flex justify-between items-center text-left text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium"
                 >
                   <span>{link.name}</span>
-                  <svg className={`w-5 h-5 transform transition-transform duration-200 ${ openAccordion === link.name ? 'rotate-180' : '' }`} fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                  <svg
+                    className={`w-5 h-5 transform transition-transform duration-200 ${openAccordion === link.name ? 'rotate-180' : ''}`}
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    ></path>
                   </svg>
                 </button>
                 {openAccordion === link.name && (
@@ -232,7 +273,7 @@ const Header: React.FC<HeaderProps> = ({ isVisible }) => {
         </div>
       )}
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

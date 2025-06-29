@@ -1,34 +1,19 @@
 // src/components/Footer.tsx
 import React from 'react';
 // Import the specific brand icons you need from react-icons
-import { FaXTwitter, FaLinkedin, FaYoutube, FaGithub } from 'react-icons/fa6';
+import { FaInstagram, FaLinkedin, FaDiscord } from 'react-icons/fa6';
+import { RiLineFill } from 'react-icons/ri'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   // We can define our social links in an array for cleaner mapping
   const socialLinks = [
-    {
-      href: '#',
-      title: 'X / Twitter',
-      Icon: FaXTwitter,
-    },
-    {
-      href: '#',
-      title: 'LinkedIn',
-      Icon: FaLinkedin,
-    },
-    {
-      href: '#',
-      title: 'YouTube',
-      Icon: FaYoutube,
-    },
-    {
-      href: '#',
-      title: 'GitHub',
-      Icon: FaGithub,
-    },
-  ];
+    { name: 'LinkedIn', href: '#', Icon: FaLinkedin },
+    { name: 'Instagram', href: '#', Icon: FaInstagram },
+    { name: 'Discord', href: '#', Icon: FaDiscord },
+    { name: 'LINE', href: '#', Icon: RiLineFill },
+  ]
 
   return (
     <footer className="bg-[#282c34] text-gray-400 text-xs py-8 px-4 sm:px-6 lg:px-8 font-sans">

@@ -10,60 +10,48 @@ interface FaqItem {
   answer: string | React.ReactNode // Answer can be simple text or include JSX
 }
 
-// Dummy FAQ data - REPLACE WITH YOUR ACTUAL FAQs
-const faqData: FaqItem[] = [
-  {
-    id: 'faq1',
-    question: 'What is SEN all about?',
-    answer:
-      'SEN is dedicated to you. We provide alot of things to help you achieve your dreams.',
-  },
-  {
-    id: 'faq2',
-    question: 'How can I become a member?',
-    answer: (
-      <>
-        You can become a member by visiting our{' '}
-        <a href="/become-a-member" className="text-purple-600 hover:underline">
-          Membership Page
-        </a>{' '}
-        and following the simple registration steps. We offer various benefits
-        like [mention a key benefit].
-      </>
-    ),
-  },
-  {
-    id: 'faq3',
-    question: 'Who is eligible to join or use your services?',
-    answer:
-      'Our platform and services are primarily aimed at [your target audience, e.g., young innovators aged 15-25, aspiring entrepreneurs, etc.]. However, we welcome anyone interested in [your field/mission] to explore our public resources.',
-  },
-  {
-    id: 'faq4',
-    question: 'Are there any fees associated with membership or services?',
-    answer:
-      'Details about membership fees (if any) and costs for specific services can be found on our [link to relevant page, e.g., Membership or Services page]. We strive to keep our core offerings accessible.',
-  },
-  {
-    id: 'faq5',
-    question: 'How can I get involved or partner with you?',
-    answer: (
-      <>
-        We're always excited to collaborate! If you're interested in
-        volunteering, mentoring, or forming a partnership, please visit our{' '}
-        <a href="/partners" className="text-purple-600 hover:underline">
-          Partners Page
-        </a>{' '}
-        or{' '}
-        <a href="/contact" className="text-purple-600 hover:underline">
-          Contact Us
-        </a>{' '}
-        directly.
-      </>
-    ),
-  },
-  // Add more FAQs
-]
+const FaqItem: React.FC<{
+  question: string
+  answer: React.ReactNode
+  isOpen: boolean
+  onClick: () => void
+}> = ({ question, answer, isOpen, onClick }) => {
+  return (
+    <div className="border-b border-gray-200 py-6">
+      <button
+        onClick={onClick}
+        className="flex justify-between items-center w-full text-left text-lg font-semibold text-gray-800 hover:text-purple-600 focus:outline-none transition-colors"
+      >
+        <span>{question}</span>
+        <span
+          className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+        >
+          <svg
+            className="w-6 h-6 text-purple-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </span>
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-screen mt-4' : 'max-h-0'}`}
+      >
+        <div className="prose prose-purple max-w-none text-gray-600 leading-relaxed">
+          {answer}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const FaqPage: React.FC = () => {
   // State to manage which FAQ item is open
@@ -75,6 +63,110 @@ const FaqPage: React.FC = () => {
 
   // Choose a highlight color for "FAQ"
   const highlightColorForFaq = 'text-amber-400' // Example: Amber
+
+  const faqData: FaqItem[] = [
+    {
+      id: 'faq1',
+      question: 'What is SEN?',
+      answer: (
+        <>
+          <p className="lead">
+            <strong>
+              SEN: Stop searching, start discovering. Your central platform for
+              student opportunities, finally in one place.
+            </strong>
+          </p>
+          <p>
+            SEN is a community-driven platform supporting English-speaking high
+            school students in Thailand with a wealth of curated opportunities,
+            practical academic resources, and resources to explore future
+            directions to confidently navigate their journey.
+          </p>
+        </>
+      ),
+    },
+    {
+      id: 'faq2',
+      question: 'Who is SEN for?',
+      answer: (
+        <p>
+          SEN is for ambitious English-speaking high school students in Thailand
+          who are tired of the endless, time-consuming hunt for ways to grow and
+          succeed. We believe your energy is better spent on achieving, not just
+          searching.
+        </p>
+      ),
+    },
+    {
+      id: 'faq3',
+      question: 'What kind of opportunities can I find?',
+      answer: (
+        <p>
+          You can discover a comprehensive collection of the best opportunities
+          – from local workshops to international internships – all made easy to
+          find.
+        </p>
+      ),
+    },
+    {
+      id: 'faq4',
+      question: 'How does SEN help with university and career planning?',
+      answer: (
+        <p>
+          We help you navigate your future with demystified career pathways and
+          clear university option breakdowns, simplifying the process of
+          planning your next steps after high school.
+        </p>
+      ),
+    },
+    {
+      id: 'faq5',
+      question: 'What academic resources do you offer?',
+      answer: (
+        <p>
+          We simplify your academic journey with straightforward explanations of
+          standardized tests and requirements. You can also access a curated
+          library of proven tools, insightful tips, and effective tricks shared
+          by successful graduated seniors.
+        </p>
+      ),
+    },
+    {
+      id: 'faq6',
+      question: 'Is SEN just a resource website?',
+      answer: (
+        <p>
+          Beyond being a resource hub, SEN is a non-profit initiative dedicated
+          to student empowerment. We foster a vibrant community where you can
+          connect with like-minded peers who share your interests and drive,
+          helping you build not just a resume, but an exceptional future.
+        </p>
+      ),
+    },
+    {
+      id: 'faq7',
+      question: 'How do I join the SEN community?',
+      answer: (
+        <p>
+          Becoming a member is easy! You can sign up by visiting our membership
+          page.We'd love to have you.
+        </p>
+      ),
+    },
+    {
+      id: 'faq8',
+      question: 'Is there a cost to become a member?',
+      answer: (
+        <p>
+          SEN is a non-profit initiative committed to student empowerment. Our
+          platform and the majority of our resources are completely free. While
+          some special events or partnered programs may have an associated cost,
+          our core mission is to provide accessible opportunities and resources
+          to every student.
+        </p>
+      ),
+    },
+  ]
 
   return (
     <div className="font-sans">
@@ -160,7 +252,7 @@ const FaqPage: React.FC = () => {
               Can't find the answer you're looking for?
             </p>
             <a
-              href="/contact" // REPLACE with your contact page path
+              href="/contacts" // REPLACE with your contact page path
               className="mt-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg text-lg shadow-md transition-colors duration-300"
             >
               Contact Our Support Team
