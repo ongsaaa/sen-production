@@ -16,9 +16,11 @@ interface OpportunityDetail {
   location?: string;
   fee?: string;
   schedule?: string;
+  additionalInfo?: string;
   imageUrl?: string;
   tags?: string[];
   status?: string;
+  providesCertificate?: boolean; // Add certificate field
 }
 
 const OpportunityDetailPage = () => {
@@ -53,9 +55,11 @@ const OpportunityDetailPage = () => {
           location: item.location,
           fee: item.fee,
           schedule: item.schedule,
+          additionalInfo: item.additionalInfo,
           imageUrl: item.imageUrl,
           tags: Array.isArray(item.industry) ? item.industry : (item.industry ? [item.industry] : []),
           status: item.status,
+          providesCertificate: item.providesCertificate, // Map certificate field
         });
       } catch (err) {
         if (err instanceof Error) setError(err.message);
@@ -93,6 +97,7 @@ const OpportunityDetailPage = () => {
     return dateString;
   }
 
+  // Build the details array
   const details = [
     { label: 'Type', value: opportunity.type },
     { label: 'Start Date', value: formatDate(opportunity.opening) },
@@ -102,6 +107,11 @@ const OpportunityDetailPage = () => {
     { label: 'Cost', value: opportunity.fee },
     { label: 'Location', value: opportunity.location },
   ].filter(detail => detail.value && detail.value.trim() !== '');
+
+  // Conditionally add the certificate detail if it's provided
+  if (opportunity.providesCertificate) {
+      details.push({ label: 'Certificate', value: 'Provided' });
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen font-sans">
@@ -136,6 +146,15 @@ const OpportunityDetailPage = () => {
                 <h2 className="text-2xl font-bold text-gray-800 mb-5 border-b border-gray-200 pb-4">Description</h2>
                 <div className="prose prose-purple max-w-none text-gray-700 leading-relaxed">
                   <p className="whitespace-pre-wrap">{opportunity.description}</p>
+                </div>
+             </div>
+          )}
+          
+          {opportunity.additionalInfo && (
+             <div className="p-8 border-t border-gray-200">
+                <h2 className="text-2xl font-bold text-gray-800 mb-5 border-b border-gray-200 pb-4">Additional Information</h2>
+                <div className="prose prose-purple max-w-none text-gray-700 leading-relaxed">
+                  <p className="whitespace-pre-wrap">{opportunity.additionalInfo}</p>
                 </div>
              </div>
           )}

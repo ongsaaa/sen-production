@@ -21,6 +21,12 @@ interface FormData {
   opening: string;
   deadline: string;
   organization: string;
+  ageRestriction: string;
+  location: string;
+  schedule: string;
+  fee: string;
+  additionalInfo: string;
+  providesCertificate: boolean; // Add certificate field
 }
 
 const initialFormData: FormData = {
@@ -34,6 +40,12 @@ const initialFormData: FormData = {
   opening: '',
   deadline: '',
   organization: '',
+  ageRestriction: '',
+  location: '',
+  schedule: '',
+  fee: '',
+  additionalInfo: '',
+  providesCertificate: false, // Initialize certificate field
 };
 
 // --- Main Component ---
@@ -46,8 +58,14 @@ const AddOpportunityPage: React.FC = () => {
 
   // --- Handlers ---
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
+    const { name, value, type } = e.target;
+    // Handle checkbox input type
+    if (type === 'checkbox') {
+      const { checked } = e.target as HTMLInputElement;
+      setFormData(prevState => ({ ...prevState, [name]: checked }));
+    } else {
+      setFormData(prevState => ({ ...prevState, [name]: value }));
+    }
   };
 
   const handleNextStep = () => {
@@ -169,6 +187,22 @@ const AddOpportunityPage: React.FC = () => {
               <label htmlFor="deadline" className={labelClass}>Application Deadline</label>
               <input type="text" name="deadline" value={formData.deadline} onChange={handleChange} className={inputClass} placeholder="DD-MM-YYYY" />
             </div>
+            <div>
+              <label htmlFor="location" className={labelClass}>Location</label>
+              <input type="text" name="location" value={formData.location} onChange={handleChange} className={inputClass} placeholder="e.g., Bangkok or Online" />
+            </div>
+            <div>
+              <label htmlFor="ageRestriction" className={labelClass}>Age Restriction</label>
+              <input type="text" name="ageRestriction" value={formData.ageRestriction} onChange={handleChange} className={inputClass} placeholder="e.g., 16-18 years old" />
+            </div>
+            <div>
+              <label htmlFor="schedule" className={labelClass}>Schedule / Duration</label>
+              <input type="text" name="schedule" value={formData.schedule} onChange={handleChange} className={inputClass} placeholder="e.g., 2 weeks, full-time" />
+            </div>
+            <div>
+              <label htmlFor="fee" className={labelClass}>Fee / Cost</label>
+              <input type="text" name="fee" value={formData.fee} onChange={handleChange} className={inputClass} placeholder="e.g., Free or 500 THB" />
+            </div>
             <div className="md:col-span-2">
               <label htmlFor="link" className={labelClass}>Link to Opportunity</label>
               <input type="url" name="link" value={formData.link} onChange={handleChange} className={inputClass} placeholder="https://apply.example.com" />
@@ -176,6 +210,24 @@ const AddOpportunityPage: React.FC = () => {
             <div className="md:col-span-2">
               <label htmlFor="imageUrl" className={labelClass}>Image URL</label>
               <input type="url" name="imageUrl" value={formData.imageUrl} onChange={handleChange} className={inputClass} placeholder="https://example.com/image.png" />
+            </div>
+            <div className="md:col-span-2">
+              <label htmlFor="additionalInfo" className={labelClass}>Additional Information</label>
+              <textarea name="additionalInfo" rows={3} value={formData.additionalInfo} onChange={handleChange} className={inputClass} placeholder="Any other details..."></textarea>
+            </div>
+            {/* Add the new checkbox field */}
+            <div className="md:col-span-2 flex items-center gap-x-3">
+                <input
+                    id="providesCertificate"
+                    name="providesCertificate"
+                    type="checkbox"
+                    checked={formData.providesCertificate}
+                    onChange={handleChange}
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                />
+                <label htmlFor="providesCertificate" className="text-sm font-medium leading-6 text-gray-900">
+                    This opportunity provides a certificate
+                </label>
             </div>
           </div>
         );
@@ -192,7 +244,17 @@ const AddOpportunityPage: React.FC = () => {
               <div><dt className="font-bold text-gray-600">Link</dt><dd className="text-gray-800 break-words">{formData.link || 'N/A'}</dd></div>
               <div><dt className="font-bold text-gray-600">Opening</dt><dd className="text-gray-800">{formData.opening || 'N/A'}</dd></div>
               <div><dt className="font-bold text-gray-600">Deadline</dt><dd className="text-gray-800">{formData.deadline || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Location</dt><dd className="text-gray-800">{formData.location || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Age Restriction</dt><dd className="text-gray-800">{formData.ageRestriction || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Schedule</dt><dd className="text-gray-800">{formData.schedule || 'N/A'}</dd></div>
+              <div><dt className="font-bold text-gray-600">Fee</dt><dd className="text-gray-800">{formData.fee || 'N/A'}</dd></div>
               <div className="md:col-span-2"><dt className="font-bold text-gray-600">Description</dt><dd className="text-gray-800 mt-1">{formData.description || 'N/A'}</dd></div>
+              <div className="md:col-span-2"><dt className="font-bold text-gray-600">Additional Info</dt><dd className="text-gray-800 mt-1">{formData.additionalInfo || 'N/A'}</dd></div>
+              {/* Display certificate info in review */}
+              <div>
+                  <dt className="font-bold text-gray-600">Provides Certificate</dt>
+                  <dd className="text-gray-800">{formData.providesCertificate ? 'Yes' : 'No'}</dd>
+              </div>
             </dl>
           </div>
         );

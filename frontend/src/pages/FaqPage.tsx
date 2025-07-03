@@ -1,4 +1,5 @@
 // src/pages/FaqPage.tsx
+import GlowingText from '@/components/GlowingText'
 import React, { useState } from 'react'
 // Optional: Consider an icon for the expand/collapse toggle
 // import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
@@ -177,7 +178,7 @@ const FaqPage: React.FC = () => {
             className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
-            <span className={`italic ${highlightColorForFaq}`}>FAQ</span>
+            <GlowingText className={`italic ${highlightColorForFaq}`}>FAQ</GlowingText>
           </h1>
           {/* ADDED SUBTITLE */}
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">

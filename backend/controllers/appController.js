@@ -6,21 +6,56 @@ import SigModel from "../model/Sig.model.js";
 import PartnerModel from "../model/Partner.model.js";
 import CareerPathwayModel from "../model/CareerPathway.model.js";
 import axios from "axios";
-import * as cheerio from "cheerio"; 
+import * as cheerio from "cheerio";
 import getScrapedData from "metadata-scraper";
 
 export async function createItem(req, res) {
     try {
-        const { type, name, industry, description, imageUrl, link, status, opening, deadline, organization, post_date } = req.body;
+        const {
+            type, name, industry, description, imageUrl, link, status,
+            opening, deadline, organization, post_date, ageRestriction,
+            location, schedule, fee, additionalInfo, providesCertificate // 1. Add providesCertificate here
+        } = req.body;
+
         if (!type || !description || !status || !post_date) {
-            return res.status(400).send({ error: "Missing required fields" });
+            return res.status(400).send({ error: "Missing required fields: type, description, status, and post_date are required." });
         }
-        if (imageUrl) new URL(imageUrl);
-        const item = new ItemModel({ type, name, industry, description, imageUrl, link, status, opening, deadline, organization, post_date });
+
+        if (imageUrl) {
+            try {
+                new URL(imageUrl);
+            } catch (e) {
+                return res.status(400).send({ error: "Invalid URL format for imageUrl." });
+            }
+        }
+
+        const item = new ItemModel({
+            type,
+            name,
+            industry,
+            description,
+            imageUrl,
+            link,
+            status,
+            opening,
+            deadline,
+            organization,
+            post_date,
+            ageRestriction,
+            location,
+            schedule,
+            fee,
+            additionalInfo,
+            providesCertificate // 2. Add providesCertificate here
+        });
+
         const savedItem = await item.save();
         return res.status(201).send({ msg: "Item Created Successfully", item: savedItem });
+
     } catch (error) {
-        if (error.name === 'ValidationError') return res.status(400).send({ error: "Validation Failed", details: error.errors });
+        if (error.name === 'ValidationError') {
+            return res.status(400).send({ error: "Validation Failed", details: error.errors });
+        }
         return res.status(500).send({ error: "Internal Server Error", message: error.message });
     }
 }
@@ -219,7 +254,7 @@ export async function webscrapeUrl(req, res) {
             }
             return '';
         };
-        
+
         const description = (metadata.description || 'No description found.').substring(0, 1200);
 
         const scrapedData = {

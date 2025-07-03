@@ -1,5 +1,6 @@
 import React from 'react'
 import OpportunitiesSection from '@/components/OpportunitiesSection'
+import GlowingText from '@/components/GlowingText'
 
 const OpportunitiesPage: React.FC = () => {
   const highlightColorForOpportunities = 'text-purple-500' // Example: Emerald Green
@@ -11,11 +12,11 @@ const OpportunitiesPage: React.FC = () => {
             className="font-header font-bold tracking-tight"
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
-            <span
+            <GlowingText
               className={`ml-2 sm:ml-3 ${highlightColorForOpportunities} italic`}
             >
               Opportunities
-            </span>
+            </GlowingText>
           </h1>
           {/* ADDED SUBTITLE */}
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">

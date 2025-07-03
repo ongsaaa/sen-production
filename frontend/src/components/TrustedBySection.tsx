@@ -1,40 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react';
 
 interface Partner {
-  id: string
-  name: string
-  logoUrl: string
-  websiteUrl?: string
+  id: string;
+  name: string;
+  logoUrl: string;
+  websiteUrl?: string;
 }
 
-const TrustedBySection: React.FC = () => {
-  const [partners, setPartners] = useState<Partner[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const apiUrl = import.meta.env.VITE_API_URL
+interface TrustedBySectionProps {
+  partners: Partner[];
+}
 
-  useEffect(() => {
-    const fetchPartners = async () => {
-      setIsLoading(true)
-      try {
-        const response = await fetch(`${apiUrl}/api/partners`)
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
-        const data: Partner[] = await response.json()
-        setPartners(data)
-      } catch (err) {
-        const e = err as Error
-        setError(e.message || 'Failed to fetch partners.')
-        console.error('Error fetching partners:', e)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchPartners()
-  }, [apiUrl])
-
+const TrustedBySection: React.FC<TrustedBySectionProps> = ({ partners }) => {
   // This sub-component renders a single set of logos
   const LogoSet = () => (
     <div className="flex-shrink-0 flex items-center justify-around w-max space-x-16 pr-16">
@@ -55,16 +32,18 @@ const TrustedBySection: React.FC = () => {
         </a>
       ))}
     </div>
-  )
+  );
 
-  if (isLoading || error || partners.length === 0) {
-    return null
+  // Don't render if there are no partners
+  if (partners.length === 0) {
+    return null;
   }
 
   return (
     <div className="bg-transparent w-full py-12">
       <div className="container mx-auto">
         <div className="w-full flex overflow-hidden">
+          {/* Duplicate the logo set to ensure a seamless loop */}
           <div className="flex animate-carousel">
             <LogoSet />
             <LogoSet />
@@ -74,7 +53,7 @@ const TrustedBySection: React.FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TrustedBySection
+export default TrustedBySection;

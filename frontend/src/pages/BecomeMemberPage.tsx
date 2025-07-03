@@ -1,6 +1,7 @@
 // src/pages/BecomeMemberPage.tsx
 import React from 'react';
 import { Link } from '@tanstack/react-router';
+import GlowingText from '@/components/GlowingText';
 
 const BecomeMemberPage: React.FC = () => {
   const highlightColorForMember = 'text-purple-400';

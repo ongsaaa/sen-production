@@ -1,4 +1,3 @@
-// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -8,10 +7,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Inter Tight"', 'sans-serif'], // Main and Section font
-        header: ['Archivo', 'sans-serif'],      // Hero Header font
+        sans: ['"Inter Tight"', 'sans-serif'],
+        header: ['Archivo', 'sans-serif'],
       },
-      // We are removing the animation and keyframes from here
+      // New animation for a slower, more subtle pulse
+      animation: {
+        'subtle-pulse': 'subtle-pulse 6s ease-in-out infinite',
+      },
+      // New keyframes for the subtle pulse effect
+      keyframes: {
+        'subtle-pulse': {
+          '0%, 100%': { opacity: 0.6 },
+          '50%': { opacity: 0.9 },
+        },
+      },
     },
   },
   plugins: [

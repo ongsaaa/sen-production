@@ -91,6 +91,11 @@ export const ItemSchema = new mongoose.Schema({
     },
     additionalInfo: {
         type: String,
+    },
+    // Add the new field for certificates
+    providesCertificate: {
+        type: Boolean,
+        default: false,
     }
 });
 

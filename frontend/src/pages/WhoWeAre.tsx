@@ -1,4 +1,5 @@
 // src/pages/WhoWeAre.tsx
+import GlowingText from '@/components/GlowingText';
 import React from 'react';
 
 const WhoWeAre: React.FC = () => {
@@ -11,7 +12,7 @@ const WhoWeAre: React.FC = () => {
         <div className="text-center">
           <h1 className="font-header font-bold tracking-tight" style={{ fontSize: 'calc(15px + 3vmin)' }}>
             <span className="text-gray-100">About</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColorForUs} italic`}>Us</span>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColorForUs} italic`}>Us</GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             Discover our mission to empower students and the values that drive us forward.

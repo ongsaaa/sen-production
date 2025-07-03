@@ -1,6 +1,7 @@
 // frontend/src/pages/AmbassadorsPage.tsx
 import React from 'react';
 import { Link } from '@tanstack/react-router';
+import GlowingText from '@/components/GlowingText';
 
 const AmbassadorsPage: React.FC = () => {
   const highlightColor = 'text-green-400'; // Example color for this page
@@ -37,9 +38,9 @@ const AmbassadorsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Our</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               Ambassadors
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             Meet the passionate leaders who represent SEN and drive our mission forward in communities around the world.
