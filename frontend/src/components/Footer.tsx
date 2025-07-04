@@ -10,9 +10,9 @@ const Footer = () => {
   // We can define our social links in an array for cleaner mapping
   const socialLinks = [
     { name: 'LinkedIn', href: '#', Icon: FaLinkedin },
-    { name: 'Instagram', href: '#', Icon: FaInstagram },
-    { name: 'Discord', href: '#', Icon: FaDiscord },
-    { name: 'LINE', href: '#', Icon: RiLineFill },
+    { name: 'Instagram', href: 'https://www.instagram.com/sen.in.th/', Icon: FaInstagram },
+    // { name: 'Discord', href: '#', Icon: FaDiscord },
+    // { name: 'LINE', href: '#', Icon: RiLineFill },
   ]
 
   return (
