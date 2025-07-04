@@ -1,6 +1,7 @@
 // frontend/src/pages/ProposeOpportunityPage.tsx
 import React, { useState } from 'react';
 import { Link } from '@tanstack/react-router';
+import GlowingText from '@/components/GlowingText';
 
 const ProposeOpportunityPage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -48,9 +49,9 @@ const ProposeOpportunityPage: React.FC = () => {
     <div className="font-sans bg-gray-50">
       {/* Hero Section */}
       <section className="bg-[#282c34] text-white py-20 px-6 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold font-header tracking-tight">
+        <GlowingText className="text-4xl md:text-5xl font-bold font-header tracking-tight">
           Propose an Opportunity
-        </h1>
+        </GlowingText>
         <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
           Have an opportunity that would benefit the SEN community? Fill out the form below to propose it for our platform.
         </p>

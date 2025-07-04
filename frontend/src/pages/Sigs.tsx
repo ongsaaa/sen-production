@@ -1,6 +1,7 @@
 // ongsaaa/sen/ongsaaa-sen-4e4cea7668c1db19ffeb9a5559c07323af263c80/frontend/src/pages/Sigs.tsx
 import React, { useState, useEffect } from 'react' // Added useEffect
 import { Link } from '@tanstack/react-router'
+import GlowingText from '@/components/GlowingText'
 
 interface SigItem {
   id: string // Mapped from sigKey or _id
@@ -63,9 +64,9 @@ const SigsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Special Interest Groups</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColorForSigs} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColorForSigs} italic`}>
               (SIGs)
-            </span>
+            </GlowingText>
           </h1>
           {/* ADDED SUBTITLE */}
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">

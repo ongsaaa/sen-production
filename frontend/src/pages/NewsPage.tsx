@@ -1,4 +1,5 @@
 // frontend/src/pages/NewsPage.tsx
+import GlowingText from '@/components/GlowingText';
 import React from 'react';
 
 const NewsPage: React.FC = () => {
@@ -36,9 +37,9 @@ const NewsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Latest</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               News
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             Explore the latest news and stories from the SEN community and the wider world of education and careers.

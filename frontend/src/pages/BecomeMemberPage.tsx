@@ -16,9 +16,9 @@ const BecomeMemberPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Become a</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColorForMember} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColorForMember} italic`}>
               Member
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             "What if finding the perfect internship or competition was easy?"

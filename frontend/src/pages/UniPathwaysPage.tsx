@@ -1,6 +1,7 @@
 // ongsaaa/sen/ongsaaa-sen-4e4cea7668c1db19ffeb9a5559c07323af263c80/frontend/src/pages/UniPathwaysPage.tsx
 import React, { useState, useEffect } from 'react'; // Added useEffect
 import { Link } from '@tanstack/react-router';
+import GlowingText from '@/components/GlowingText';
 
 interface UniversityTier {
   name: string;
@@ -80,9 +81,9 @@ const UniPathwaysPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">University</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               Pathways
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             "Navigate your future with demystified career pathways and clear university option breakdowns."

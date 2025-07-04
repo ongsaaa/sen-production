@@ -1,6 +1,7 @@
 // ongsaaa/sen/ongsaaa-sen-4e4cea7668c1db19ffeb9a5559c07323af263c80/frontend/src/pages/PartnersPage.tsx
 import React, { useState, useEffect } from 'react'
 import { Link } from '@tanstack/react-router'
+import GlowingText from '@/components/GlowingText'
 
 interface Partner {
   id: string
@@ -73,11 +74,11 @@ const PartnersPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Our</span>
-            <span
+            <GlowingText
               className={`ml-2 sm:ml-3 ${highlightColorForPartners} italic`}
             >
               Partners
-            </span>
+            </GlowingText>
           </h1>
           {/* ADDED SUBTITLE */}
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">

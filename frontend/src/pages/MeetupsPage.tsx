@@ -1,4 +1,5 @@
 // frontend/src/pages/MeetupsPage.tsx
+import GlowingText from '@/components/GlowingText';
 import React from 'react';
 
 const MeetupsPage: React.FC = () => {
@@ -36,9 +37,9 @@ const MeetupsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Community</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               Meetups
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             Connect with fellow students and professionals at our online and in-person events.

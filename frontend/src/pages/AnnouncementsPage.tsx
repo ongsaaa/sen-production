@@ -1,4 +1,5 @@
 // frontend/src/pages/AnnouncementsPage.tsx
+import GlowingText from '@/components/GlowingText';
 import React from 'react';
 
 const AnnouncementsPage: React.FC = () => {
@@ -33,9 +34,9 @@ const AnnouncementsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Latest</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               Announcements
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             Stay up-to-date with the latest news, events, and updates from the SEN community.

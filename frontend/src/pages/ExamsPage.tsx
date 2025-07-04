@@ -1,4 +1,5 @@
 // ongsaaa/sen/ongsaaa-sen-4e4cea7668c1db19ffeb9a5559c07323af263c80/frontend/src/pages/ExamsPage.tsx
+import GlowingText from '@/components/GlowingText';
 import React, { useState, useEffect } from 'react'; // Added useEffect
 // Link component is not used in this version, but keep if you add internal links
 // import { Link } from '@tanstack/react-router';
@@ -70,9 +71,9 @@ const ExamsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Standardized</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               Exams Guide
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             "Simplify your academic journey with straightforward explanations of standardized tests and requirements."

@@ -1,6 +1,7 @@
 // frontend/src/pages/CommunityProjectsPage.tsx
 import React from 'react';
 import { Link } from '@tanstack/react-router';
+import GlowingText from '@/components/GlowingText';
 
 const CommunityProjectsPage: React.FC = () => {
   const highlightColor = 'text-orange-400'; // A new color for this page
@@ -43,9 +44,9 @@ const CommunityProjectsPage: React.FC = () => {
             style={{ fontSize: 'calc(15px + 3vmin)' }}
           >
             <span className="text-gray-100">Community</span>
-            <span className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
+            <GlowingText className={`ml-2 sm:ml-3 ${highlightColor} italic`}>
               Projects
-            </span>
+            </GlowingText>
           </h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
             Discover and collaborate on inspiring projects led by SEN members from around the globe.
