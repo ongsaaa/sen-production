@@ -19,7 +19,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ isExiting }) => {
         <img
           src={senLogo}
           alt="SEN Logo"
-          className="h-40 w-auto"
+          className="h-60 w-auto"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.onerror = null;
