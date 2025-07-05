@@ -34,6 +34,7 @@ import ProposeOpportunityPage from './pages/ProposeOpportunityPage'
 import AnnouncementsPage from './pages/AnnouncementsPage'
 import NewsPage from './pages/NewsPage'
 import MeetupsPage from './pages/MeetupsPage'
+import ComingSoonPage from './pages/ComingSoonPage' // Import the new page
 
 import './styles.css' // Your global styles
 
@@ -190,6 +191,13 @@ const meetupsRoute = createRoute({
   component: MeetupsPage,
 })
 
+// Add the new route
+const comingSoonRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/coming-soon',
+    component: ComingSoonPage,
+});
+
 
 // 3. Create the Route Tree
 const routeTree = rootRoute.addChildren([
@@ -216,7 +224,8 @@ const routeTree = rootRoute.addChildren([
   proposeOpportunityRoute,
   announcementsRoute,
   newsRoute,
-  meetupsRoute
+  meetupsRoute,
+  comingSoonRoute // Add the new route to the tree
 ])
 
 // 4. Create the Router Instance

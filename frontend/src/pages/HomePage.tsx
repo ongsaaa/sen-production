@@ -1,3 +1,4 @@
+// ongsaaa/sen-production/sen-production-bb8553b28ccd35b9e754e50e68d88cc1b89ddc40/frontend/src/pages/HomePage.tsx
 import React, { useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
 import TrustedBySection from '@/components/TrustedBySection';
@@ -28,14 +29,18 @@ const HomePage: React.FC = () => {
       <div className="min-h-screen w-full relative flex items-center justify-center bg-gradient-to-br from-[#212529] to-[#282c34] text-white">
         
         <main className="container mx-auto text-center px-4 sm:px-6">
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-white font-header">
+          {/* MODIFICATION HERE: Changed text-5xl to text-[2.5rem] for better scaling on small mobile devices */}
+          <h1 className="text-[2.5rem] leading-tight sm:text-6xl md:text-8xl font-bold tracking-tight text-white font-header">
             <GlowingText className="text-white">
               Stop searching.
             </GlowingText>
             <br />
-            <GlowingText className="bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent">
-              Start discovering.
-            </GlowingText>
+            {/* MODIFICATION HERE: Added whitespace-nowrap to prevent the text from breaking into multiple lines */}
+            <span className="whitespace-nowrap">
+              <GlowingText className="bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text text-transparent">
+                Start discovering.
+              </GlowingText>
+            </span>
           </h1>
           
           <p className="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-gray-300">
